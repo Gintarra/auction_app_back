@@ -2,8 +2,6 @@ const express = require('express')
 const app = express()
 const mongoose = require('mongoose')
 const session = require('express-session')
-const auctionDb = require('./models/AuctionSchema')
-const schedule = require('node-schedule')
 
 require('dotenv').config()
 
@@ -36,63 +34,6 @@ mongoose.connect(process.env.MONGO_KEY)
     }).catch(e => {
         console.log(e)
     })
-
-
-let allAuctions = []
-
-
-
-
-// async function all() {
-//     allAuctions = await auctionDb.find({ active: true }, {new: true})
-//     console.log(allAuctions)
-//    // console.log(Math.round(Date.now()/1000))
-//     const startTime = (Math.round(Date.now() / 1000))
-//     allAuctions.map(x => schedule.scheduleJob({ start: startTime*1000, end: x.endTime*1000, rule: '*/1 * * * * *' },
-//         async function () {
-//             console.log((Math.round(Date.now() / 1000)), "date now")
-//             console.log(x.endTime, "date end")
-//             if (Math.round(Date.now() / 1000) >= x.endTime) {
-//                 let xMap = x;
-//                 console.log(x.endTime)
-//                 let aucUpdate = await auctionDb.findOneAndUpdate({ _id: xMap._id },
-//                     { $set: { active: false } }, { new: true })
-
-//                 console.log(aucUpdate, "atnaujintas aukcionas")
-//                 let owner = await userDb.findOneAndUpdate({ username: aucUpdate.ownerName }, { $inc: { money: aucUpdate.price } }, { new: true })
-//                 console.log(owner, "savininkas")
-//                 let winUser = await userDb.findOneAndUpdate({ username: aucUpdate.bids[aucUpdate.bids.length - 1].username }, { $inc: { money: -aucUpdate.price } })
-//                 winUser = await userDb.findOneAndUpdate({ username: aucUpdate.ownerName }, { $inc: { reservedMoney: -aucUpdate.price } })
-//                 let loggedUser = await userDb.findOne({ username: req.session.user })
-
-//                 const allAuctionsNew = await auctionDb.find({})
-//                 // return res.send({ success: true, data: allAuctionsNew, data2: loggedUser })
-//                 // return
-//             }
-
-//         }))
-// }
-
- //all()
-// async function newf () {
-//      const startTime = (Date.now() + 5000);
-//     const endTime = (startTime + 10000);
-//     const arrayNew = await auctionDb.find({ active: true })
-//      arrayNew.map(x=> schedule.scheduleJob({ start: (Date.now()), end: endTime, rule: '*/1 * * * * *' }, function () {
-//       console.log(new Date(Date.now()))
-//         console.log(endTime, "endTime")
-//         if ((Date.now()) >= (startTime + 5000)) {
-//             console.log('Time for tea!');
-//         }
-
-//     }))
-// }
-
-// newf()
-
-
-
-
 
 
 
